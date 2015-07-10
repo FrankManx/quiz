@@ -1,5 +1,13 @@
-<table>
-  <% var i; for(i=0; i< quizes.length; i++) { %>
+
+  <%
+    if (quizes.length == 0 || quizes.length === undefined)
+    { %>
+      <p> No hemos encontrado ningúna pregunta que cumpla su criterio de búsqueda </p>
+    <% }
+     else { %>
+     <table>
+    <%    var i; for(i=0; i< quizes.length; i++) { %>
     <tr><td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
-<% } %>
-</table>
+  <% } %>
+    </table>
+  <% }%>
