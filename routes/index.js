@@ -14,11 +14,13 @@ router.get('/', function(req, res) {
 router.param('quizId', quizController.load);
 
 // GET Quizes
-router.get('/quizes', quizController.index);  // También se ocupa de las búsquedas
-router.get('/quizes/:quizId(\\d+)', quizController.show);
-router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
-router.get('/quizes/new', quizController.new);
-router.post('/quizes/create', quizController.create); //POST
+router.get('/quizes',                       quizController.index);  // También se ocupa de las búsquedas
+router.get('/quizes/:quizId(\\d+)',         quizController.show);
+router.get('/quizes/:quizId(\\d+)/answer',  quizController.answer);
+router.get('/quizes/new',                   quizController.new);
+router.post('/quizes/create',               quizController.create); //POST
+router.get('/quizes/:quizId(\\d+)/edit',    quizController.edit);
+router.put('/quizes/:quizId(\\d+)',         quizController.update); //PUT
 
 //GET Author
 router.get('/author', authorController.author);

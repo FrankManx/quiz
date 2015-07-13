@@ -64,6 +64,34 @@ exports.show = function (req, res) {
   })
 };
 
+//GET /quizes/:id/edit
+exports.edit = function (req, res) {
+    var quiz= req.quiz; //autoload de instancia de quiz
+    res.render('quizes/edit', { quiz: req.quiz, errors: []});
+};
+
+// PUT /quizes/:id
+exports.update = function(req, res) {
+  var quiz= req.quiz;
+  quiz.pregunta  = req.body.quiz.pregunta;
+  quiz.respuesta = req.body.quiz.respuesta;
+
+  quiz
+  .validate()
+  .then(
+    function(err){
+      if (err) {
+        res.render('quizes/edit', {quiz: quiz, errors: err.errors});
+      } else {
+        quiz
+        .save( {fields: ["pregunta", "respuesta"]}) // save: guarda campos pregunta y respuesta en DB
+        .then( function(){ res.redirect('/quizes');}); // Redirección HTTP a lista de preguntas (URL relativo)
+      }
+    }
+  );
+};
+
+
 //GET /quizes/:id/answer
 exports.answer = function (req, res) {
   //console.log(req);
