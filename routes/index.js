@@ -17,7 +17,8 @@ router.param('quizId', quizController.load);
 router.get('/quizes', quizController.index);  // También se ocupa de las búsquedas
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
-
+router.get('/quizes/new', quizController.new);
+router.post('/quizes/create', quizController.create); //POST
 
 //GET Author
 router.get('/author', authorController.author);

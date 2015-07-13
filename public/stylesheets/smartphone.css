@@ -12,3 +12,6 @@ body
 
 footer , input
   { font-size: large;}
+
+h2 span, section h3, label.rem    
+  { display: none; }
