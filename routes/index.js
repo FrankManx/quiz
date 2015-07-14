@@ -5,6 +5,7 @@ var quizController = require ('../controllers/quiz_controller');
 var authorController = require ('../controllers/author');
 var searchController = require ('../controllers/search');
 var commentController = require ('../controllers/comment_controller');
+var sessionController = require ('../controllers/session_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -27,6 +28,11 @@ router.delete('/quizes/:quizId(\\d+)',      quizController.destroy); //DELETE
 //Comentarios
 router.get('/quizes/:quizId(\\d+)/comments/new',  commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments',  commentController.create);
+
+// Definición de rutas de sesion
+router.get('/login',    sessionController.new);     // formulario login
+router.post('/login',   sessionController.create);  // crear sesión
+router.get('/logout',   sessionController.destroy); // destruir sesión
 
 //GET Author
 router.get('/author',   authorController.author);
