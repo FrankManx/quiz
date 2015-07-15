@@ -13,21 +13,24 @@ router.get('/', function(req, res) {
 });
 
 // autoload de comandos con :quizId
-router.param('quizId', quizController.load);
+router.param('quizId', quizController.load);  //autoload :quizId
+//router.param('commentId', commentController.load); //autoload :commentId
 
 // GET Quizes
 router.get('/quizes',                       quizController.index);  // También se ocupa de las búsquedas
 router.get('/quizes/:quizId(\\d+)',         quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer',  quizController.answer);
-router.get('/quizes/new',                   quizController.new);
-router.post('/quizes/create',               quizController.create); //POST
-router.get('/quizes/:quizId(\\d+)/edit',    quizController.edit);
-router.put('/quizes/:quizId(\\d+)',         quizController.update); //PUT
-router.delete('/quizes/:quizId(\\d+)',      quizController.destroy); //DELETE
+router.get('/quizes/new',                   sessionController.loginRequired,    quizController.new);
+router.post('/quizes/create',               sessionController.loginRequired,    quizController.create); //POST
+router.get('/quizes/:quizId(\\d+)/edit',    sessionController.loginRequired,    quizController.edit);
+router.put('/quizes/:quizId(\\d+)',         sessionController.loginRequired,    quizController.update); //PUT
+router.delete('/quizes/:quizId(\\d+)',      sessionController.loginRequired,    quizController.destroy); //DELETE
 
 //Comentarios
-router.get('/quizes/:quizId(\\d+)/comments/new',  commentController.new);
-router.post('/quizes/:quizId(\\d+)/comments',  commentController.create);
+router.get('/quizes/:quizId(\\d+)/comments/new',    commentController.new);
+router.post('/quizes/:quizId(\\d+)/comments',       commentController.create);
+//router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish',
+//                                                  sessionController.loginRequired, commentController.publish);)
 
 // Definición de rutas de sesion
 router.get('/login',    sessionController.new);     // formulario login
