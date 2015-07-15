@@ -36,9 +36,6 @@ exports.index = function (req, res, next) {
 };
 
 
-
-
-
 //GET /quizes/new
 exports.new = function(req,res) {
   var quiz = models.Quiz.build( //Creamos objeto quiz
